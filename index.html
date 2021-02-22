@@ -7,41 +7,50 @@
    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
    <script type="text/javascript">
        $("document").ready(function(){
-        
-           $("#pet_likes").hide();
-           $("#pet_eats").hide();
-
-          
-
-           $("#pet_feels").click(function(e){
-               alert("it works");
-
-           })
+            $("#pet_likes").hide();    
+            $("#pet_eats").hide(); 
+            
+            $("#pet_feels").click(function(e){
 
 
-           
+                $("#pet_likes").slideDown(200);
+                });
 
-           $('#myForm').submit(function(e){
+                $("#pet_likes").click(function(e){
+                    $("#pet_eats").slideDown(200);
+
+                });
+       
+    
+       
+                $('#myForm').submit(function(e){
                //alert("hi!  I'm jQuery!");
-              let feels = $("input[name=feels]:checked").val();
-              let likes = $("input[name=likes]:checked").val();
-              let eats = $("input[name=eats]:checked").val();// this is how you select a item in from html to js 
-              
-              if (feels=="fluffy"&& likes=="petted"&& eats=="carrots"){
-                alert("rabbet");
+               let feels=$("input[name=feels]:checked").val();
+               let likes=$("input[name=likes]:checked").val();
+               let eats=$("input[name=eats]:checked").val();
+               let pet="";
 
-              }
-              let output = ""; // thisw is how you declear a variable in javascript
-              output+= `<p>my pet feels:${feels}</p>`;
-              output+= `<p>my pet like to be:${likes} </p>`;
-              output+= `<p>my pet likes to eat:${eats} </p>`;
+                if(feels=="fluffy" && likes=="petted" && eats=="carrots"){
+                    pet="rabbit";
+                }
 
-              $("#output").html(output); // this how we select datat from html to javascript
-             
+                if(feels=="scaly" && likes=="ridden" && eats=="pets"){
+                    pet="velociraptor";
+                }
+                
+
+               let output= "";
+               output +=`<p>My pet is a: ${pet}</p>`;
+               output +=`<p>My pet likes to be: ${likes}</p>`;
+               output +=`<p>My pet likes to eat: ${eats}</p>`;
+               
+               $("#output").html(output);
+               //alert(feels);
+              $('#pet').load(`includes/content.html #${pet}`);
                e.preventDefault();//no need to submit as you'll be doing AJAX on this page
        
            });
-       });
+     });
    </script>
 </head>
 <Style>
